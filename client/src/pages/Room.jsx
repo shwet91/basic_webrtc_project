@@ -54,20 +54,14 @@ function Room() {
 
   useEffect(() => {
     socket.on("new-user-joined", newUserJoined);
-    // socket.on("incomming-call", acceptCall);
+    socket.on("incomming-call", acceptCall);
     return () => {
       socket.off("new-user-joined", newUserJoined);
-      // socket.off("incomming-call", acceptCall);
+      socket.off("incomming-call", acceptCall);
     };
   }, [socket, newUserJoined, acceptCall]);
 
 
-  useEffect(() => {
-    socket.on("incomming-call" , (data) => {
-      console.log("worked")
-      console.log(data)
-    } )
-  }, [socket, acceptCall])
 
   return (
     <div className="w-full h-[90vh] border-white border-2">
