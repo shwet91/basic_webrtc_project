@@ -24,6 +24,7 @@ io.on("connection", (socket) => {
   socket.on("join-room", (data) => {
     const { roomId, name } = data;
     console.log(`roomId and name joined is ${roomId} ${name}`, socket.id);
+    // here I have stored name and socket id in key value pairs.
     nameToSocketIdMapping.set(name, socket.id);
     socketIdToNameMapping.set(socket.id, name);
 
@@ -38,6 +39,7 @@ io.on("connection", (socket) => {
     const receiverSocketId = nameToSocketIdMapping.get(receiverName);
     const senderName = socketIdToNameMapping.get(socket.id);
     console.log(receiverSocketId);
+    // I have checked the value of receiverSocketId is correct.
     socket.to(receiverSocketId).emit("incomming-call", { offer, senderName });
   });
 });
